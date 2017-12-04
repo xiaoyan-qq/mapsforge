@@ -131,7 +131,7 @@ public abstract class SamplesBaseActivity extends MapViewerTemplateRuntimePermis
         if (mapfile != null) {
             return mapfile;
         }
-        return "germany.map";
+        return getResources().getString(R.string.map_file_name);
     }
 
     @Override

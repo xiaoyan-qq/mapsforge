@@ -41,7 +41,7 @@ public class GroupMarkerExample extends DefaultTheme {
 
     @SuppressWarnings("deprecation")
     private void addGroupMarker() {
-        LatLong latLong = new LatLong(52.525582, 13.370061);
+        LatLong latLong = new LatLong(25.078288, 121.523680);
         Bitmap bitmap = AndroidGraphicFactory.convertToBitmap(getResources().getDrawable(R.drawable.marker_green));
         GroupMarker groupMarker = new GroupMarker(latLong, bitmap, 0, -bitmap.getHeight() / 2, mapView.getLayerManager().getLayers(), BLACK);
         for (int i = 0; i < 10.; i++) {

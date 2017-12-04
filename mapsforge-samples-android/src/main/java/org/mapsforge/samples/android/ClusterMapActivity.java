@@ -48,16 +48,16 @@ public class ClusterMapActivity extends DefaultTheme {
     private MenuItem displayMoreItems;
     private MenuItem hideItems;
     private MyGeoItem[] geoItems = {
-            new MyGeoItem("1st Item", new LatLong(52.504266, 13.392996)),
-            new MyGeoItem("2nd Item", new LatLong(52.514266, 13.392996)),
-            new MyGeoItem("3rd Item", new LatLong(52.524266, 13.392996)),
-            new MyGeoItem("4th Item", new LatLong(52.534266, 13.392996)),
-            new MyGeoItem("5th Item", new LatLong(52.514266, 13.352996)),
-            new MyGeoItem("6th Item", new LatLong(52.514266, 13.362996)),
-            new MyGeoItem("7th Item", new LatLong(52.514266, 13.372996)),
-            new MyGeoItem("8th Item", new LatLong(52.514266, 13.382996)),
-            new MyGeoItem("9th Item", new LatLong(52.514266, 13.383796)),
-            new MyGeoItem("10th Item", new LatLong(52.514266, 13.383700))
+            new MyGeoItem("1st Item", new LatLong(25.078288, 121.52368)),
+            new MyGeoItem("2nd Item", new LatLong(25.078188, 121.52368)),
+            new MyGeoItem("3rd Item", new LatLong(25.078088, 121.52368)),
+            new MyGeoItem("4th Item", new LatLong(25.078388, 121.52368)),
+            new MyGeoItem("5th Item", new LatLong(25.078488, 121.52368)),
+            new MyGeoItem("6th Item", new LatLong(25.078588, 121.52368)),
+            new MyGeoItem("7th Item", new LatLong(25.078688, 121.52368)),
+            new MyGeoItem("8th Item", new LatLong(25.078788, 121.52368)),
+            new MyGeoItem("9th Item", new LatLong(25.078888, 121.52368)),
+            new MyGeoItem("10th Item", new LatLong(25.078988, 121.52368))
     };
 
     private List<MarkerBitmap> getMarkerBitmap() {

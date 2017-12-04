@@ -64,7 +64,7 @@ public class SimplestMapViewer extends MapViewerTemplate {
      */
     @Override
     protected String getMapFileName() {
-        return "germany.map";
+        return getResources().getString(R.string.map_file_name);
     }
 
     /**

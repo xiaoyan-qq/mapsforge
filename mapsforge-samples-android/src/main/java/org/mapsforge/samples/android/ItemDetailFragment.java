@@ -147,6 +147,6 @@ public class ItemDetailFragment extends Fragment {
     }
 
     protected String getMapFileName() {
-        return "germany.map";
+        return getResources().getString(R.string.map_file_name);
     }
 }
