@@ -14,7 +14,7 @@
     <application
         android:name=".SamplesApplication"
         android:allowBackup="true"
-        android:testOnly="false"
+        android:testOnly="false" 
         android:label="Mapsforge Samples">
         <activity
             android:name=".Samples"
