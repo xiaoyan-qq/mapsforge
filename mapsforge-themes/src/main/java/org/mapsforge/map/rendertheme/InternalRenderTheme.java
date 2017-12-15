@@ -23,7 +23,7 @@ import java.io.InputStream;
 public enum InternalRenderTheme implements XmlRenderTheme {
 
     DEFAULT("/assets/mapsforge/default.xml"),
-    OSMARENDER("/assets/mapsforge/osmarender.xml");
+    OSMARENDER("/assets/mapsforge/osmarender.xml"),MAPBOX_STYLE("/assets/mapsforge/mapbox_style.xml");
 
     private final String path;
 

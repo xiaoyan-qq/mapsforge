@@ -50,6 +50,9 @@ public class Samples extends Activity {
     private Button createButton(Class<?> clazz) {
         return this.createButton(clazz, null, null);
     }
+    private Button createButton(Class<?> clazz,String buttonText) {
+        return this.createButton(clazz, buttonText, null);
+    }
 
     private Button createButton(final Class<?> clazz, String text, View.OnClickListener customListener) {
         Button button = new Button(this);
@@ -193,6 +196,11 @@ public class Samples extends Activity {
         linearLayout.addView(createButton(LabelLayerUsingLabelCacheMapViewer.class));
         linearLayout.addView(createButton(ClusterMapActivity.class));
         linearLayout.addView(createButton(GroupMarkerExample.class));
+
+        linearLayout.addView(createLabel("CatEye测试"));
+        linearLayout.addView(createButton(CatEyeTileWorldLayerViewer.class,"在线-世界tile地图"));
+        linearLayout.addView(createButton(CatEyeMapBoxStyleActivityViewer.class,"类mapbox的地图样式"));
+        linearLayout.addView(createButton(MultiMapViewerActivity.class,"加载多地图文件显示"));
     }
 
     @Override

@@ -191,6 +191,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Samples" />
         </activity>
+        <activity
+            android:name=".CatEyeTileWorldLayerViewer"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="世界地图"/>
+        <activity
+            android:name=".CatEyeMapBoxStyleActivityViewer"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="MapboxStyle风格地图"/>
     </application>
 
 </manifest>

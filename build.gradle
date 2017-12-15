@@ -95,7 +95,7 @@ configure(filterProjects(project.javaprojects)) {
 
 // Configuration for Android projects
 project.ext.androidlibraryprojects = ["mapsforge-map-android", "mapsforge-map-android-extras", "mapsforge-poi-android"]
-project.ext.androidapkprojects = ["mapsforge-samples-android"]
+project.ext.androidapkprojects = ["mapsforge-samples-android","mapsforge-cateye"]
 project.ext.androidprojects = project.androidlibraryprojects + project.androidapkprojects
 
 // TODO get checkstyle and pmd working for android (right now it does not work out of the box, so better wait for official fix)

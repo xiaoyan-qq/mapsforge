@@ -16,19 +16,20 @@ package org.mapsforge.samples.android;
 
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.download.TileDownloadLayer;
-import org.mapsforge.map.layer.download.tilesource.OnlineTileSource;
+import org.mapsforge.map.layer.download.tilesource.CatEyeTileSource;
 
 /**
  * Shows how to use a custom tile download layer.
  */
-public class DownloadCustomLayerViewer extends DownloadLayerViewer {
+public class CatEyeTileWorldLayerViewer extends DownloadLayerViewer {
     @Override
     protected void createLayers() {
-        OnlineTileSource onlineTileSource = new OnlineTileSource(new String[]{
-                "a.tile.openstreetmap.fr", "b.tile.openstreetmap.fr", "c.tile.openstreetmap.fr"},
-                80);
-        onlineTileSource.setName("Humanitarian").setAlpha(false)
-                .setBaseUrl("/hot/")
+        CatEyeTileSource onlineTileSource = new CatEyeTileSource(new String[]{
+                "54.223.166.139"/*, "b.tile.openstreetmap.fr", "c.tile.openstreetmap.fr"*/},
+                8080);
+
+        onlineTileSource.setName("gujiao").setAlpha(false)
+                .setBaseUrl("/tile/world/").setExtension(null)
                 .setParallelRequestsLimit(8).setProtocol("http").setTileSize(256)
                 .setZoomLevelMax((byte) 18).setZoomLevelMin((byte) 0);
         onlineTileSource.setUserAgent("Mapsforge Samples");
