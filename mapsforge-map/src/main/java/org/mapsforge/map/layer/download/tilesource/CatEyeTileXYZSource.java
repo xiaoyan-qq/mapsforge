@@ -19,7 +19,10 @@ import org.mapsforge.core.model.Tile;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class CatEyeTileSource extends AbstractTileSource {
+/**
+ * http://54.223.166.139:8080/xyz/world/{x}/{y}/{z}.jpeg
+ * */
+public class CatEyeTileXYZSource extends AbstractTileSource {
     private boolean alpha = false;
     private String baseUrl = "/";
     private String extension = "png";
@@ -30,7 +33,7 @@ public class CatEyeTileSource extends AbstractTileSource {
     private byte zoomLevelMax = 18;
     private byte zoomLevelMin = 0;
 
-    public CatEyeTileSource(String[] hostNames, int port) {
+    public CatEyeTileXYZSource(String[] hostNames, int port) {
         super(hostNames, port);
     }
 
@@ -39,10 +42,10 @@ public class CatEyeTileSource extends AbstractTileSource {
         if (!super.equals(obj)) {
             return false;
         }
-        if (!(obj instanceof CatEyeTileSource)) {
+        if (!(obj instanceof CatEyeTileXYZSource)) {
             return false;
         }
-        CatEyeTileSource other = (CatEyeTileSource) obj;
+        CatEyeTileXYZSource other = (CatEyeTileXYZSource) obj;
         if (!this.baseUrl.equals(other.baseUrl)) {
             return false;
         }
@@ -79,11 +82,11 @@ public class CatEyeTileSource extends AbstractTileSource {
         StringBuilder stringBuilder = new StringBuilder(32);
 
         stringBuilder.append(baseUrl);
-        stringBuilder.append(tile.zoomLevel);
-        stringBuilder.append('/');
         stringBuilder.append(tile.tileX);
         stringBuilder.append('/');
         stringBuilder.append(tile.tileY);
+        stringBuilder.append('/');
+        stringBuilder.append(tile.zoomLevel);
         if (extension!=null&&!"".equals(extension.trim())){
             stringBuilder.append('.').append(extension);
         }
@@ -114,47 +117,47 @@ public class CatEyeTileSource extends AbstractTileSource {
         return result;
     }
 
-    public CatEyeTileSource setAlpha(boolean alpha) {
+    public CatEyeTileXYZSource setAlpha(boolean alpha) {
         this.alpha = alpha;
         return this;
     }
 
-    public CatEyeTileSource setBaseUrl(String baseUrl) {
+    public CatEyeTileXYZSource setBaseUrl(String baseUrl) {
         this.baseUrl = baseUrl;
         return this;
     }
 
-    public CatEyeTileSource setExtension(String extension) {
+    public CatEyeTileXYZSource setExtension(String extension) {
         this.extension = extension;
         return this;
     }
 
-    public CatEyeTileSource setName(String name) {
+    public CatEyeTileXYZSource setName(String name) {
         this.name = name;
         return this;
     }
 
-    public CatEyeTileSource setParallelRequestsLimit(int parallelRequestsLimit) {
+    public CatEyeTileXYZSource setParallelRequestsLimit(int parallelRequestsLimit) {
         this.parallelRequestsLimit = parallelRequestsLimit;
         return this;
     }
 
-    public CatEyeTileSource setProtocol(String protocol) {
+    public CatEyeTileXYZSource setProtocol(String protocol) {
         this.protocol = protocol;
         return this;
     }
 
-    public CatEyeTileSource setTileSize(int tileSize) {
+    public CatEyeTileXYZSource setTileSize(int tileSize) {
         this.tileSize = tileSize;
         return this;
     }
 
-    public CatEyeTileSource setZoomLevelMax(byte zoomLevelMax) {
+    public CatEyeTileXYZSource setZoomLevelMax(byte zoomLevelMax) {
         this.zoomLevelMax = zoomLevelMax;
         return this;
     }
 
-    public CatEyeTileSource setZoomLevelMin(byte zoomLevelMin) {
+    public CatEyeTileXYZSource setZoomLevelMin(byte zoomLevelMin) {
         this.zoomLevelMin = zoomLevelMin;
         return this;
     }

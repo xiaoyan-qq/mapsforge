@@ -16,7 +16,7 @@ package org.mapsforge.samples.android;
 
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.download.TileDownloadLayer;
-import org.mapsforge.map.layer.download.tilesource.CatEyeTileSource;
+import org.mapsforge.map.layer.download.tilesource.CatEyeTileTMSSource;
 
 /**
  * Shows how to use a custom tile download layer.
@@ -24,14 +24,14 @@ import org.mapsforge.map.layer.download.tilesource.CatEyeTileSource;
 public class CatEyeTileWorldLayerViewer extends DownloadLayerViewer {
     @Override
     protected void createLayers() {
-        CatEyeTileSource onlineTileSource = new CatEyeTileSource(new String[]{
+        CatEyeTileTMSSource onlineTileSource = new CatEyeTileTMSSource(new String[]{
                 "54.223.166.139"/*, "b.tile.openstreetmap.fr", "c.tile.openstreetmap.fr"*/},
                 8080);
 
-        onlineTileSource.setName("gujiao").setAlpha(false)
-                .setBaseUrl("/tile/world/").setExtension(null)
+        onlineTileSource.setName("world").setAlpha(false)
+                .setBaseUrl("/tms/1.0.0/world_satellite_raster@EPSG:900913@jpeg/").setExtension("jpeg")
                 .setParallelRequestsLimit(8).setProtocol("http").setTileSize(256)
-                .setZoomLevelMax((byte) 18).setZoomLevelMin((byte) 0);
+                .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         onlineTileSource.setUserAgent("Mapsforge Samples");
         this.downloadLayer = new TileDownloadLayer(this.tileCaches.get(0),
                 this.mapView.getModel().mapViewPosition, onlineTileSource,
