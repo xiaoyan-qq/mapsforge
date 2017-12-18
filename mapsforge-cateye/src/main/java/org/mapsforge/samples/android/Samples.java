@@ -200,7 +200,7 @@ public class Samples extends Activity {
         linearLayout.addView(createLabel("CatEye测试"));
         linearLayout.addView(createButton(CatEyeTileWorldLayerViewer.class,"在线-世界tile地图"));
         linearLayout.addView(createButton(CatEyeMapBoxStyleActivityViewer.class,"类mapbox的地图样式"));
-//        linearLayout.addView(createButton(MultiMapViewerActivity.class,"加载多地图文件显示"));
+        linearLayout.addView(createButton(CatEyeMultiMapStoreMapViewer.class,"加载多地图文件显示"));
     }
 
     @Override

@@ -199,6 +199,10 @@
             android:name=".CatEyeMapBoxStyleActivityViewer"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="MapboxStyle风格地图"/>
+        <activity
+            android:name=".CatEyeMultiMapStoreMapViewer"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="多地图文件同时加载"/>
     </application>
 
 </manifest>
