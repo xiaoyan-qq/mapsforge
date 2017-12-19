@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <org.mapsforge.map.android.view.MapView
+        android:id="@+id/mapView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <TextView
+        android:id="@+id/attribution"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/attribution_margin"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/copyright_osm"
+        android:textColor="#000"
+        android:textSize="@dimen/attribution_size" />
+    <RelativeLayout
+        android:id="@+id/layer_main_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="测试"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/layer_main_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/attribution_margin"
+        android:layout_alignParentRight="true">
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -79,4 +79,15 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
             }
         }));
     }
+
+    @Override
+    protected void setContentView() {
+        super.setContentView();
+        setContentView(R.layout.cateye_main_mapview);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.cateye_main_mapview;
+    }
 }

@@ -17,7 +17,6 @@
  */
 package org.mapsforge.map.android.util;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -42,7 +41,7 @@ import java.util.List;
  * A abstract template map viewer activity that provides a standard life cycle and
  * modification points for mapsforge-based map activities.
  */
-public abstract class MapViewerTemplate extends Activity {
+public abstract class MapViewerTemplate extends CompatActivity {
 
     protected MapView mapView;
     protected PreferencesFacade preferencesFacade;
