@@ -15,6 +15,7 @@
         android:name=".SamplesApplication"
         android:allowBackup="true"
         android:testOnly="false"
+        android:theme="@style/Theme.AppCompat"
         android:label="Mapsforge Samples">
         <activity
             android:name=".Samples"

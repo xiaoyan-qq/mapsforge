@@ -1,10 +1,12 @@
 dependencies {
-    api project(":mapsforge-core")
+    api project(':mapsforge-core')
     implementation 'net.sf.kxml:kxml2:2.3.0'
     testImplementation 'commons-io:commons-io:2.5'
     testImplementation 'org.mortbay.jetty:jetty:6.1.26'
     testImplementation 'org.slf4j:slf4j-log4j12:1.7.25'
-    implementation 'com.yanzhenjie:fragment:1.0.1'
-    implementation "com.android.support:support-compat:$supportVersion"
-    implementation "com.android.support:support-fragment:$supportVersion"
+    compile 'com.yanzhenjie:fragment:1.0.1'//https://github.com/yanzhenjie/NoFragment
+    compile 'org.greenrobot:eventbus:3.1.1'//https://github.com/greenrobot/EventBus
+    compile "com.android.support:support-compat:$supportVersion"
+    compile "com.android.support:support-fragment:$supportVersion"
+    compile "com.android.support:appcompat-v7:$supportVersion"
 }

@@ -97,4 +97,5 @@ public class CatEyeMapBoxStyleActivityViewer extends MapViewerTemplate {
         super.onCreate(savedInstanceState);
         setTitle(getClass().getSimpleName());
     }
+
 }

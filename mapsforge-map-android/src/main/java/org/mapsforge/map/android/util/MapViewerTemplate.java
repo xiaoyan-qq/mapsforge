@@ -20,6 +20,8 @@ package org.mapsforge.map.android.util;
 import android.os.Bundle;
 import android.os.Environment;
 
+import com.yanzhenjie.fragment.CompatActivity;
+
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
@@ -345,5 +347,10 @@ public abstract class MapViewerTemplate extends CompatActivity {
      */
     protected HillsRenderConfig getHillsRenderConfig() {
         return null;
+    }
+
+    @Override
+    protected int fragmentLayoutId() {
+        return 0;
     }
 }

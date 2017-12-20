@@ -15,14 +15,17 @@
 package org.mapsforge.samples.android;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.map.datastore.MapDataStore;
 import org.mapsforge.map.datastore.MultiMapDataStore;
 import org.mapsforge.map.reader.MapFile;
+import org.mapsforge.samples.android.fragment.CatEyeMainFragment;
+import org.mapsforge.samples.android.util.SystemConstant;
 
 import java.io.File;
 
@@ -54,7 +57,10 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
             public void onShowPress(MotionEvent motionEvent) {
                 if (motionEvent != null && motionEvent.getPointerCount() < 2) {
                     LatLong latLong = mapView.getMapViewProjection().fromPixels(motionEvent.getX(), motionEvent.getY());
-                    Toast.makeText(CatEyeMultiMapStoreMapViewer.this, "用户点击:" + latLong.toString(), Toast.LENGTH_SHORT).show();
+                    Message msg=new Message();
+                    msg.what= SystemConstant.MSG_KEY_EVENT_MAP_TAP;
+                    msg.obj=latLong;
+                    EventBus.getDefault().post(msg);
                 }
             }
 
@@ -78,6 +84,8 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                 return false;
             }
         }));
+
+        startFragment(CatEyeMainFragment.class);
     }
 
     @Override
@@ -89,5 +97,10 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
     @Override
     protected int getLayoutId() {
         return R.layout.cateye_main_mapview;
+    }
+
+    @Override
+    protected int fragmentLayoutId() {
+        return R.id.layer_main_root_fragment;
     }
 }

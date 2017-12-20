@@ -31,4 +31,9 @@ public class DefaultTheme extends SamplesBaseActivity {
     protected XmlRenderTheme getRenderTheme() {
         return InternalRenderTheme.DEFAULT;
     }
+
+    @Override
+    protected int fragmentLayoutId() {
+        return 0;
+    }
 }
