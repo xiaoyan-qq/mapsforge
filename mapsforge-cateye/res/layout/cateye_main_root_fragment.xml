@@ -7,19 +7,34 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="测试"/>
+
     </RelativeLayout>
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layer_main_bottom"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/attribution_margin"
         android:layout_alignParentRight="true">
-
-    </RelativeLayout>
+        <Button
+            android:id="@+id/btn_main_root_fragment_drawPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="绘制点"/>
+        <Button
+            android:id="@+id/btn_main_root_fragment_drawLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="绘制线"/>
+        <Button
+            android:id="@+id/btn_main_root_fragment_drawPolygon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="绘制面"/>
+        <Button
+            android:id="@+id/btn_main_root_fragment_drawFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="结束"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -191,7 +191,11 @@ public abstract class MapViewerTemplate extends CompatActivity {
      * @return
      */
     protected File getMapFileDirectory() {
-        return Environment.getExternalStorageDirectory();
+        File mapFileDirectory = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "CatEye");
+        if (!mapFileDirectory.exists()) {
+            mapFileDirectory.mkdirs();
+        }
+        return mapFileDirectory;
     }
 
     /**
@@ -352,5 +356,18 @@ public abstract class MapViewerTemplate extends CompatActivity {
     @Override
     protected int fragmentLayoutId() {
         return 0;
+    }
+
+    @Override
+    public File getCacheDir() {
+        File mapFileDirectory = getMapFileDirectory();
+        if (mapFileDirectory.exists()) {
+            File cacheFile = new File(mapFileDirectory.getAbsolutePath() + File.separator + "cache");
+            if (!cacheFile.exists()) {
+                cacheFile.mkdirs();
+            }
+            return cacheFile;
+        }
+        return null;
     }
 }
