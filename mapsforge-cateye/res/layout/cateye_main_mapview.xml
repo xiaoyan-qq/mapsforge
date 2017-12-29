@@ -26,4 +26,17 @@
         android:id="@+id/layer_main_root_fragment">
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:id="@+id/cateye_main_layer_list">
+        <CheckBox android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag=""
+            android:id="@+id/chk_main_mapview_xyz_world"
+            android:text="world_xyz"></CheckBox>
+    </LinearLayout>
 </RelativeLayout>

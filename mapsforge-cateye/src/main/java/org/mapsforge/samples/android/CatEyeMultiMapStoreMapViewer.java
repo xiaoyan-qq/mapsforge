@@ -42,6 +42,7 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
     private Polyline currentEditPolyLine;
     private Polygon currentEditPolygon;
 
+    pri
     @Override
     public MapDataStore getMapFile() {
         return this.multiMapDataStore;
@@ -82,7 +83,7 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                     } else if (draw_state == MAP_DRAW_STATE.DRAW_LINE) {
                         if (currentEditPolyLine != null) {
                             currentEditPolyLine.getLatLongs().add(latLong);
-                            if (currentEditPolygon.getLatLongs().size() == 1) {//等于1时，绘制一个对应的点位marker
+                            if (currentEditPolyLine.getLatLongs().size() == 1) {//等于1时，绘制一个对应的点位marker
                                 mapView.addLayer(Utils.createMarker(CatEyeMultiMapStoreMapViewer.this, R.drawable.point_orange, latLong));
                             }
                             mapView.getLayerManager().redrawLayers();
@@ -123,10 +124,16 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
         startFragment(CatEyeMainFragment.class);
     }
 
+    private void initLayerCheckBox(){
+
+    }
+
     @Override
     protected void setContentView() {
         super.setContentView();
         setContentView(R.layout.cateye_main_mapview);
+
+        initLayerCheckBox();
     }
 
     @Override
