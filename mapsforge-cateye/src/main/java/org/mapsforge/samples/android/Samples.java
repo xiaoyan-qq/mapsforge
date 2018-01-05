@@ -50,7 +50,8 @@ public class Samples extends Activity {
     private Button createButton(Class<?> clazz) {
         return this.createButton(clazz, null, null);
     }
-    private Button createButton(Class<?> clazz,String buttonText) {
+
+    private Button createButton(Class<?> clazz, String buttonText) {
         return this.createButton(clazz, buttonText, null);
     }
 
@@ -198,9 +199,10 @@ public class Samples extends Activity {
         linearLayout.addView(createButton(GroupMarkerExample.class));
 
         linearLayout.addView(createLabel("CatEye测试"));
-        linearLayout.addView(createButton(CatEyeTileWorldLayerViewer.class,"在线-世界tile地图"));
-        linearLayout.addView(createButton(CatEyeMapBoxStyleActivityViewer.class,"类mapbox的地图样式"));
-        linearLayout.addView(createButton(CatEyeMultiMapStoreMapViewer.class,"加载多地图文件显示"));
+        linearLayout.addView(createButton(CatEyeTileWorldLayerViewer.class, "在线-世界tile地图"));
+        linearLayout.addView(createButton(CatEyeMapBoxStyleActivityViewer.class, "类mapbox的地图样式"));
+        linearLayout.addView(createButton(CatEyeMultiMapStoreMapViewer.class, "加载多地图文件显示"));
+        linearLayout.addView(createButton(CatEyeMainActivity.class, "CatEye的主界面"));
     }
 
     @Override

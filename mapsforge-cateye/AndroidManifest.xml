@@ -14,9 +14,9 @@
     <application
         android:name=".SamplesApplication"
         android:allowBackup="true"
+        android:label="Mapsforge Samples"
         android:testOnly="false"
-        android:theme="@style/Theme.AppCompat"
-        android:label="Mapsforge Samples">
+        android:theme="@style/Theme.AppCompat">
         <activity
             android:name=".Samples"
             android:configChanges="keyboardHidden|orientation|screenSize">
@@ -195,15 +195,19 @@
         <activity
             android:name=".CatEyeTileWorldLayerViewer"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="世界地图"/>
+            android:label="世界地图" />
         <activity
             android:name=".CatEyeMapBoxStyleActivityViewer"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="MapboxStyle风格地图"/>
+            android:label="MapboxStyle风格地图" />
         <activity
             android:name=".CatEyeMultiMapStoreMapViewer"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="多地图文件同时加载"/>
+            android:label="多地图文件同时加载" />
+        <activity
+            android:name=".CatEyeMainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="主界面" />
     </application>
 
 </manifest>

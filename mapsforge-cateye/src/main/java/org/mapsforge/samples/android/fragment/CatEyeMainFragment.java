@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,16 @@ import com.yanzhenjie.fragment.NoFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
+import org.mapsforge.core.model.Tile;
+import org.mapsforge.map.util.LayerUtil;
 import org.mapsforge.samples.android.CatEyeMultiMapStoreMapViewer;
 import org.mapsforge.samples.android.R;
 import org.mapsforge.samples.android.util.SystemConstant;
+
+import java.net.MalformedURLException;
+import java.util.Set;
 
 /**
  * Created by zhangdezhi1702 on 2017/12/20.
@@ -26,7 +33,7 @@ import org.mapsforge.samples.android.util.SystemConstant;
 public class CatEyeMainFragment extends NoFragment {
     private View rootView;
 
-    private Button btn_drawPoint,btn_drawLine,btn_drawPolygon,btn_drawFinish;
+    private Button btn_drawPoint, btn_drawLine, btn_drawPolygon, btn_drawFinish, btn_donwload;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,16 +50,18 @@ public class CatEyeMainFragment extends NoFragment {
         return rootView;
     }
 
-    private void initView(View rootView){
-        btn_drawPoint=rootView.findViewById(R.id.btn_main_root_fragment_drawPoint);
-        btn_drawLine=rootView.findViewById(R.id.btn_main_root_fragment_drawLine);
-        btn_drawPolygon=rootView.findViewById(R.id.btn_main_root_fragment_drawPolygon);
-        btn_drawFinish=rootView.findViewById(R.id.btn_main_root_fragment_drawFinish);
+    private void initView(View rootView) {
+        btn_drawPoint = rootView.findViewById(R.id.btn_main_root_fragment_drawPoint);
+        btn_drawLine = rootView.findViewById(R.id.btn_main_root_fragment_drawLine);
+        btn_drawPolygon = rootView.findViewById(R.id.btn_main_root_fragment_drawPolygon);
+        btn_drawFinish = rootView.findViewById(R.id.btn_main_root_fragment_drawFinish);
+        btn_donwload = rootView.findViewById(R.id.btn_main_root_fragment_download);
 
         btn_drawPoint.setOnClickListener(clickListener);
         btn_drawLine.setOnClickListener(clickListener);
         btn_drawPolygon.setOnClickListener(clickListener);
         btn_drawFinish.setOnClickListener(clickListener);
+        btn_donwload.setOnClickListener(downloadListener);
     }
 
     @Override
@@ -71,19 +80,34 @@ public class CatEyeMainFragment extends NoFragment {
         }
     }
 
-    View.OnClickListener clickListener=new View.OnClickListener() {
+    View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view.getId()==R.id.btn_main_root_fragment_drawPoint){//绘制点
-                ((CatEyeMultiMapStoreMapViewer)getActivity()).setDraw_state(CatEyeMultiMapStoreMapViewer.MAP_DRAW_STATE.DRAW_POINT);
-            }else if (view.getId()==R.id.btn_main_root_fragment_drawLine){//绘制线
-                ((CatEyeMultiMapStoreMapViewer)getActivity()).setDraw_state(CatEyeMultiMapStoreMapViewer.MAP_DRAW_STATE.DRAW_LINE);
-                ((CatEyeMultiMapStoreMapViewer)getActivity()).addNewPolyLineOverlay();
-            }else if (view.getId()==R.id.btn_main_root_fragment_drawPolygon){//绘制面
-                ((CatEyeMultiMapStoreMapViewer)getActivity()).setDraw_state(CatEyeMultiMapStoreMapViewer.MAP_DRAW_STATE.DRAW_POLYGON);
-                ((CatEyeMultiMapStoreMapViewer)getActivity()).addNewPolygonOverlay();
-            }else if (view.getId()==R.id.btn_main_root_fragment_drawFinish){//绘制结束
-                ((CatEyeMultiMapStoreMapViewer)getActivity()).setDraw_state(CatEyeMultiMapStoreMapViewer.MAP_DRAW_STATE.DRAW_FINISH);
+            if (view.getId() == R.id.btn_main_root_fragment_drawPoint) {//绘制点
+                ((CatEyeMultiMapStoreMapViewer) getActivity()).setDraw_state(CatEyeMultiMapStoreMapViewer.MAP_DRAW_STATE.DRAW_POINT);
+            } else if (view.getId() == R.id.btn_main_root_fragment_drawLine) {//绘制线
+                ((CatEyeMultiMapStoreMapViewer) getActivity()).setDraw_state(CatEyeMultiMapStoreMapViewer.MAP_DRAW_STATE.DRAW_LINE);
+                ((CatEyeMultiMapStoreMapViewer) getActivity()).addNewPolyLineOverlay();
+            } else if (view.getId() == R.id.btn_main_root_fragment_drawPolygon) {//绘制面
+                ((CatEyeMultiMapStoreMapViewer) getActivity()).setDraw_state(CatEyeMultiMapStoreMapViewer.MAP_DRAW_STATE.DRAW_POLYGON);
+                ((CatEyeMultiMapStoreMapViewer) getActivity()).addNewPolygonOverlay();
+            } else if (view.getId() == R.id.btn_main_root_fragment_drawFinish) {//绘制结束
+                ((CatEyeMultiMapStoreMapViewer) getActivity()).setDraw_state(CatEyeMultiMapStoreMapViewer.MAP_DRAW_STATE.DRAW_FINISH);
+            }
+        }
+    };
+
+    View.OnClickListener downloadListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            BoundingBox boundingBox=new BoundingBox(33.6,80,55.0,118.0);
+            Set<Tile> tileList=LayerUtil.getTiles(boundingBox,(byte) 7,1024);
+            for (Tile tile:tileList){
+                try {
+                    Log.e("CatEye",((CatEyeMultiMapStoreMapViewer)getActivity()).getCityTMSTileSource().getTileUrl(tile).toString());
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     };

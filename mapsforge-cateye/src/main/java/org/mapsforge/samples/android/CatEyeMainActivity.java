@@ -41,7 +41,7 @@ import org.mapsforge.samples.android.util.SystemConstant;
 
 import java.io.File;
 
-public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
+public class CatEyeMainActivity extends DefaultTheme {
 
     private MultiMapDataStore multiMapDataStore;
     private MAP_DRAW_STATE draw_state = MAP_DRAW_STATE.DRAW_FINISH;
@@ -61,6 +61,7 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         multiMapDataStore = new MultiMapDataStore(MultiMapDataStore.DataPolicy.RETURN_ALL);
         File worldFile = new File(getMapFileDirectory(), "world.map");
         if (worldFile.exists()) {
@@ -72,7 +73,7 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
         }
         super.onCreate(savedInstanceState);
 
-        mapView.setGestureDetector(new GestureDetector(CatEyeMultiMapStoreMapViewer.this, new GestureDetector.OnGestureListener() {
+        mapView.setGestureDetector(new GestureDetector(CatEyeMainActivity.this, new GestureDetector.OnGestureListener() {
             @Override
             public boolean onDown(MotionEvent motionEvent) {
                 return false;
@@ -88,13 +89,13 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                         msg.obj = latLong;
                         EventBus.getDefault().post(msg);
                     } else if (draw_state == MAP_DRAW_STATE.DRAW_POINT) {
-                        mapView.addLayer(Utils.createTappableMarker(CatEyeMultiMapStoreMapViewer.this,
+                        mapView.addLayer(Utils.createTappableMarker(CatEyeMainActivity.this,
                                 R.drawable.marker_red, latLong));
                     } else if (draw_state == MAP_DRAW_STATE.DRAW_LINE) {
                         if (currentEditPolyLine != null) {
                             currentEditPolyLine.getLatLongs().add(latLong);
                             if (currentEditPolyLine.getLatLongs().size() == 1) {//等于1时，绘制一个对应的点位marker
-                                mapView.addLayer(Utils.createMarker(CatEyeMultiMapStoreMapViewer.this, R.drawable.point_orange, latLong));
+                                mapView.addLayer(Utils.createMarker(CatEyeMainActivity.this, R.drawable.point_orange, latLong));
                             }
                             mapView.getLayerManager().redrawLayers();
                         }
@@ -102,7 +103,7 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                         if (currentEditPolygon != null) {
                             currentEditPolygon.getLatLongs().add(latLong);
                             if (currentEditPolygon.getLatLongs().size() == 1) {//等于1时，绘制一个对应的点位marker
-                                mapView.addLayer(Utils.createMarker(CatEyeMultiMapStoreMapViewer.this, R.drawable.point_orange, latLong));
+                                mapView.addLayer(Utils.createMarker(CatEyeMainActivity.this, R.drawable.point_orange, latLong));
                             }
                             mapView.getLayerManager().redrawLayers();
                         }
@@ -145,8 +146,8 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         worldTMSTileSource.setUserAgent("Mapsforge Samples");
 
-        CatEyeMultiMapStoreMapViewer.this.worldTMSLayer = new TileDownloadLayer(this.tileCaches.get(1),
-                CatEyeMultiMapStoreMapViewer.this.mapView.getModel().mapViewPosition, worldTMSTileSource,
+        CatEyeMainActivity.this.worldTMSLayer = new TileDownloadLayer(this.tileCaches.get(1),
+                CatEyeMainActivity.this.mapView.getModel().mapViewPosition, worldTMSTileSource,
                 AndroidGraphicFactory.INSTANCE);
 
         chk_tms_world = findViewById(R.id.chk_main_mapview_tms_world);
@@ -154,11 +155,11 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mapView.getLayerManager().getLayers().add(CatEyeMultiMapStoreMapViewer.this.worldTMSLayer);
+                    mapView.getLayerManager().getLayers().add(CatEyeMainActivity.this.worldTMSLayer);
                     worldTMSLayer.start();
                     setMaxTextWidthFactor();
                 } else {
-                    mapView.getLayerManager().getLayers().remove(CatEyeMultiMapStoreMapViewer.this.worldTMSLayer);
+                    mapView.getLayerManager().getLayers().remove(CatEyeMainActivity.this.worldTMSLayer);
                     setMaxTextWidthFactor();
                 }
             }
@@ -176,8 +177,8 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         worldXYZTileSource.setUserAgent("Mapsforge Samples");
 
-        CatEyeMultiMapStoreMapViewer.this.worldXYZLayer = new TileDownloadLayer(this.tileCaches.get(2),
-                CatEyeMultiMapStoreMapViewer.this.mapView.getModel().mapViewPosition, worldXYZTileSource,
+        CatEyeMainActivity.this.worldXYZLayer = new TileDownloadLayer(this.tileCaches.get(2),
+                CatEyeMainActivity.this.mapView.getModel().mapViewPosition, worldXYZTileSource,
                 AndroidGraphicFactory.INSTANCE);
 
         chk_xyz_world = findViewById(R.id.chk_main_mapview_xyz_world);
@@ -185,11 +186,11 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mapView.getLayerManager().getLayers().add(CatEyeMultiMapStoreMapViewer.this.worldXYZLayer);
+                    mapView.getLayerManager().getLayers().add(CatEyeMainActivity.this.worldXYZLayer);
                     worldXYZLayer.start();
                     setMaxTextWidthFactor();
                 } else {
-                    mapView.getLayerManager().getLayers().remove(CatEyeMultiMapStoreMapViewer.this.worldXYZLayer);
+                    mapView.getLayerManager().getLayers().remove(CatEyeMainActivity.this.worldXYZLayer);
                     setMaxTextWidthFactor();
                 }
             }
@@ -207,8 +208,8 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         cityTMSTileSource.setUserAgent("Mapsforge Samples");
 
-        CatEyeMultiMapStoreMapViewer.this.cityTMSLayer = new TileDownloadLayer(this.tileCaches.get(3),
-                CatEyeMultiMapStoreMapViewer.this.mapView.getModel().mapViewPosition, cityTMSTileSource,
+        CatEyeMainActivity.this.cityTMSLayer = new TileDownloadLayer(this.tileCaches.get(3),
+                CatEyeMainActivity.this.mapView.getModel().mapViewPosition, cityTMSTileSource,
                 AndroidGraphicFactory.INSTANCE);
 
         chk_tms_city = findViewById(R.id.chk_main_mapview_tms_city);
@@ -216,11 +217,11 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mapView.getLayerManager().getLayers().add(CatEyeMultiMapStoreMapViewer.this.cityTMSLayer);
+                    mapView.getLayerManager().getLayers().add(CatEyeMainActivity.this.cityTMSLayer);
                     cityTMSLayer.start();
                     setMaxTextWidthFactor();
                 } else {
-                    mapView.getLayerManager().getLayers().remove(CatEyeMultiMapStoreMapViewer.this.cityTMSLayer);
+                    mapView.getLayerManager().getLayers().remove(CatEyeMainActivity.this.cityTMSLayer);
                     setMaxTextWidthFactor();
                 }
             }
@@ -238,8 +239,8 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         cityXYZTileSource.setUserAgent("Mapsforge Samples");
 
-        CatEyeMultiMapStoreMapViewer.this.cityXYZLayer = new TileDownloadLayer(this.tileCaches.get(4),
-                CatEyeMultiMapStoreMapViewer.this.mapView.getModel().mapViewPosition, cityXYZTileSource,
+        CatEyeMainActivity.this.cityXYZLayer = new TileDownloadLayer(this.tileCaches.get(4),
+                CatEyeMainActivity.this.mapView.getModel().mapViewPosition, cityXYZTileSource,
                 AndroidGraphicFactory.INSTANCE);
 
         chk_xyz_city = findViewById(R.id.chk_main_mapview_xyz_city);
@@ -247,11 +248,11 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mapView.getLayerManager().getLayers().add(CatEyeMultiMapStoreMapViewer.this.cityXYZLayer);
+                    mapView.getLayerManager().getLayers().add(CatEyeMainActivity.this.cityXYZLayer);
                     cityXYZLayer.start();
                     setMaxTextWidthFactor();
                 } else {
-                    mapView.getLayerManager().getLayers().remove(CatEyeMultiMapStoreMapViewer.this.cityXYZLayer);
+                    mapView.getLayerManager().getLayers().remove(CatEyeMainActivity.this.cityXYZLayer);
                     setMaxTextWidthFactor();
                 }
             }
@@ -269,8 +270,8 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         gujiaoXYZTileSource.setUserAgent("Mapsforge Samples");
 
-        CatEyeMultiMapStoreMapViewer.this.gujiaoXYZLayer = new TileDownloadLayer(this.tileCaches.get(5),
-                CatEyeMultiMapStoreMapViewer.this.mapView.getModel().mapViewPosition, gujiaoXYZTileSource,
+        CatEyeMainActivity.this.gujiaoXYZLayer = new TileDownloadLayer(this.tileCaches.get(5),
+                CatEyeMainActivity.this.mapView.getModel().mapViewPosition, gujiaoXYZTileSource,
                 AndroidGraphicFactory.INSTANCE);
 
         chk_xyz_gujiao = findViewById(R.id.chk_main_mapview_xyz_gujiao);
@@ -278,11 +279,11 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    mapView.getLayerManager().getLayers().add(CatEyeMultiMapStoreMapViewer.this.gujiaoXYZLayer);
+                    mapView.getLayerManager().getLayers().add(CatEyeMainActivity.this.gujiaoXYZLayer);
                     gujiaoXYZLayer.start();
                     setMaxTextWidthFactor();
                 } else {
-                    mapView.getLayerManager().getLayers().remove(CatEyeMultiMapStoreMapViewer.this.gujiaoXYZLayer);
+                    mapView.getLayerManager().getLayers().remove(CatEyeMainActivity.this.gujiaoXYZLayer);
                     setMaxTextWidthFactor();
                 }
             }
@@ -297,11 +298,6 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
         initTMSCityLayerCheckBox();
         initXYZCityLayerCheckBox();
         initXYZGujiaoLayerCheckBox();
-    }
-
-    @Override
-    protected void setContentView() {
-        super.setContentView();
     }
 
     @Override

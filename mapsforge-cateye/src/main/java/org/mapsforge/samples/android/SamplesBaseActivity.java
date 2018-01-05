@@ -123,8 +123,6 @@ public abstract class SamplesBaseActivity extends MapViewerTemplateRuntimePermis
         this.tileCaches.add(AndroidUtil.createTileCache(this, getPersistableId(),
                 this.mapView.getModel().displayModel.getTileSize(), this.getScreenRatio(),
                 this.mapView.getModel().frameBufferModel.getOverdrawFactor(), persistent));
-//        TileCache tileCache = new FileSystemTileCache(2048, getCacheDir(), AndroidGraphicFactory.INSTANCE, true);
-//        this.tileCaches.add(tileCache);
     }
 
     @Override
