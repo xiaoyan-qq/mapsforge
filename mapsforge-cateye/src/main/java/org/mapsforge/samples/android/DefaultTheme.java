@@ -32,8 +32,4 @@ public class DefaultTheme extends SamplesBaseActivity {
         return InternalRenderTheme.DEFAULT;
     }
 
-    @Override
-    protected int fragmentLayoutId() {
-        return 0;
-    }
 }

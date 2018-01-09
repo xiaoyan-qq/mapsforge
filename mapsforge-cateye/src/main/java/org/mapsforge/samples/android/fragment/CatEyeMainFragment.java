@@ -4,53 +4,37 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.yanzhenjie.fragment.NoFragment;
+import com.jkb.fragment.rigger.rigger.Rigger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
-import org.mapsforge.core.model.Tile;
-import org.mapsforge.map.util.LayerUtil;
 import org.mapsforge.samples.android.CatEyeMultiMapStoreMapViewer;
 import org.mapsforge.samples.android.R;
 import org.mapsforge.samples.android.util.SystemConstant;
-
-import java.net.MalformedURLException;
-import java.util.Set;
 
 /**
  * Created by zhangdezhi1702 on 2017/12/20.
  */
 
-public class CatEyeMainFragment extends NoFragment {
-    private View rootView;
-
+public class CatEyeMainFragment extends BaseNoFragment {
     private Button btn_drawPoint, btn_drawLine, btn_drawPolygon, btn_drawFinish, btn_donwload;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        EventBus.getDefault().register(this);
-    }
-
-    @Nullable
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.cateye_main_root_fragment, null);
-        initView(rootView);
+        EventBus.getDefault().register(this);
+        rootView = inflater.inflate(R.layout.cateye_main_root_fragment, container, false);
         return rootView;
     }
 
-    private void initView(View rootView) {
+    @Override
+    protected void initView(View rootView) {
         btn_drawPoint = rootView.findViewById(R.id.btn_main_root_fragment_drawPoint);
         btn_drawLine = rootView.findViewById(R.id.btn_main_root_fragment_drawLine);
         btn_drawPolygon = rootView.findViewById(R.id.btn_main_root_fragment_drawPolygon);
@@ -100,15 +84,62 @@ public class CatEyeMainFragment extends NoFragment {
     View.OnClickListener downloadListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            BoundingBox boundingBox=new BoundingBox(33.6,80,55.0,118.0);
-            Set<Tile> tileList=LayerUtil.getTiles(boundingBox,(byte) 7,1024);
-            for (Tile tile:tileList){
-                try {
-                    Log.e("CatEye",((CatEyeMultiMapStoreMapViewer)getActivity()).getCityTMSTileSource().getTileUrl(tile).toString());
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-            }
+//            BoundingBox boundingBox=new BoundingBox(33.6,80,55.0,118.0);
+//            Set<Tile> tileList=LayerUtil.getTiles(boundingBox,(byte) 7,1024);
+//            for (Tile tile:tileList){
+//                try {
+//                    Log.e("CatEye",((CatEyeMultiMapStoreMapViewer)getActivity()).getCityTMSTileSource().getTileUrl(tile).toString());
+//                } catch (MalformedURLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+            CatEyeOfflineRectDrawFragment catEyeOfflineRectDrawFragment = new CatEyeOfflineRectDrawFragment();
+            catEyeOfflineRectDrawFragment.setArguments(new Bundle());
+            Rigger.getRigger(CatEyeMainFragment.this).startFragment(catEyeOfflineRectDrawFragment);
+//            try {
+//                Retrofit retrofit = new Retrofit.Builder()
+//                        .baseUrl("https://api.github.com")
+//                        .addConverterFactory(new Converter.Factory() {
+//                            @Override
+//                            public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+//                                return new Converter<ResponseBody, String>() {
+//                                    @Override
+//                                    public String convert(ResponseBody value) throws IOException {
+//                                        return value.toString();
+//                                    }
+//                                };
+//                            }
+//
+//                            @Override
+//                            public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
+//                                return new Converter<RequestBody, RequestBody>() {
+//
+//                                    @Override
+//                                    public RequestBody convert(RequestBody value) throws IOException {
+//                                        return value;
+//                                    }
+//                                };
+//                            }
+//                        })
+//                        .build();
+//
+//                GitHubService service = retrofit.create(GitHubService.class);
+//                Call<String> stringCall=service.listRepos("xiaoyan159");
+//                stringCall.enqueue(new Callback<String>() {
+//                    @Override
+//                    public void onResponse(Call<String> call, Response<String> response) {
+//                        Log.d("TAG",response.message());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<String> call, Throwable t) {
+//                        Log.e("TAG",t.getMessage());
+//                    }
+//                });
+//            }catch (Exception e){
+//                Log.e("TAG",e.getMessage());
+//            }
+
         }
     };
 }

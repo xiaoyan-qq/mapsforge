@@ -21,6 +21,9 @@ import android.view.MotionEvent;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.jkb.fragment.rigger.annotation.Puppet;
+import com.jkb.fragment.rigger.rigger.Rigger;
+
 import org.greenrobot.eventbus.EventBus;
 import org.mapsforge.core.graphics.Color;
 import org.mapsforge.core.graphics.Style;
@@ -41,6 +44,7 @@ import org.mapsforge.samples.android.util.SystemConstant;
 
 import java.io.File;
 
+@Puppet(containerViewId = R.id.layer_main_root_fragment)
 public class CatEyeMainActivity extends DefaultTheme {
 
     private MultiMapDataStore multiMapDataStore;
@@ -132,7 +136,10 @@ public class CatEyeMainActivity extends DefaultTheme {
             }
         }));
 
-        startFragment(CatEyeMainFragment.class);
+//        startFragment(CatEyeMainFragment.class);
+        CatEyeMainFragment catEyeMainFragment=new CatEyeMainFragment();
+        catEyeMainFragment.setArguments(new Bundle());
+        Rigger.getRigger(CatEyeMainActivity.this).startFragment(catEyeMainFragment);
     }
 
     private void initTMSWorldLayerCheckBox() {
@@ -303,11 +310,6 @@ public class CatEyeMainActivity extends DefaultTheme {
     @Override
     protected int getLayoutId() {
         return R.layout.cateye_main_mapview;
-    }
-
-    @Override
-    protected int fragmentLayoutId() {
-        return R.id.layer_main_root_fragment;
     }
 
     public enum MAP_DRAW_STATE {

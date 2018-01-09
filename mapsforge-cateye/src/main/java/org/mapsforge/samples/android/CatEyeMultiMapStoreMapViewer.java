@@ -36,7 +36,6 @@ import org.mapsforge.map.layer.download.tilesource.CatEyeTileXYZSource;
 import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
 import org.mapsforge.map.reader.MapFile;
-import org.mapsforge.samples.android.fragment.CatEyeMainFragment;
 import org.mapsforge.samples.android.util.SystemConstant;
 
 import java.io.File;
@@ -130,8 +129,6 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
                 return false;
             }
         }));
-
-        startFragment(CatEyeMainFragment.class);
     }
 
     private void initTMSWorldLayerCheckBox() {
@@ -309,10 +306,6 @@ public class CatEyeMultiMapStoreMapViewer extends DefaultTheme {
         return R.layout.cateye_main_mapview;
     }
 
-    @Override
-    protected int fragmentLayoutId() {
-        return R.id.layer_main_root_fragment;
-    }
 
     public enum MAP_DRAW_STATE {
         DRAW_POINT, DRAW_LINE, DRAW_POLYGON, DRAW_FINISH;

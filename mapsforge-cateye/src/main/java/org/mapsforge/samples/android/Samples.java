@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -41,7 +42,7 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 /**
  * Start screen for the sample activities.
  */
-public class Samples extends Activity {
+public class Samples extends AppCompatActivity {
     /**
      * Serves as a substitute for command line arguments for easy launches during development.
      */

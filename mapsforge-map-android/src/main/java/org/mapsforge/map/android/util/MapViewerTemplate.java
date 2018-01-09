@@ -19,8 +19,7 @@ package org.mapsforge.map.android.util;
 
 import android.os.Bundle;
 import android.os.Environment;
-
-import com.yanzhenjie.fragment.CompatActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
@@ -43,7 +42,7 @@ import java.util.List;
  * A abstract template map viewer activity that provides a standard life cycle and
  * modification points for mapsforge-based map activities.
  */
-public abstract class MapViewerTemplate extends CompatActivity {
+public abstract class MapViewerTemplate extends AppCompatActivity {
 
     protected MapView mapView;
     protected PreferencesFacade preferencesFacade;
@@ -351,11 +350,6 @@ public abstract class MapViewerTemplate extends CompatActivity {
      */
     protected HillsRenderConfig getHillsRenderConfig() {
         return null;
-    }
-
-    @Override
-    protected int fragmentLayoutId() {
-        return 0;
     }
 
     @Override
