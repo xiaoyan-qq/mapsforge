@@ -29,7 +29,7 @@ public class NoXMLLayout extends DefaultTheme {
      * @return
      */
     @Override
-    protected MapView getMapView() {
+    public MapView getMapView() {
         MapView mv = new MapView(this);
         setContentView(mv);
         return mv;

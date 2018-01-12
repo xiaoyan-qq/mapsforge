@@ -92,4 +92,22 @@
     <string name="startup_message_poi">To run this sample activity, you need any poi with filename germany.poi installed on storage.\n\nadb push file.poi /sdcard/germany.poi</string>
 
     <string name="map_file_name">taiwan.map</string>
+
+    <string-array name="tile_download_level">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+    </string-array>
 </resources>

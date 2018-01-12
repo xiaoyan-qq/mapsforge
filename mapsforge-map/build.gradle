@@ -6,9 +6,14 @@ dependencies {
     testImplementation 'org.slf4j:slf4j-log4j12:1.7.25'
     compile 'org.greenrobot:eventbus:3.1.1'//https://github.com/greenrobot/EventBus
     compile 'com.justkiddingbaby:fragment-rigger:1.0.0'//https://github.com/JustKiddingBaby/FragmentRigger/wiki/%E9%A6%96%E9%A1%B5
+    compile 'com.github.vondear:RxTools:v1.7.6.4'//https://github.com/vondear/RxTools
+    compile 'com.edmodo:rangebar:1.0.0'//双向的seekbar控件
+    compile 'com.orhanobut:logger:2.1.1'
     compile "com.android.support:support-compat:$supportVersion"
     compile "com.android.support:support-fragment:$supportVersion"
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.8'
 }

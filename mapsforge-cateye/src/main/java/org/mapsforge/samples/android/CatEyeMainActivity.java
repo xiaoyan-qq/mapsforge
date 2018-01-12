@@ -149,7 +149,7 @@ public class CatEyeMainActivity extends DefaultTheme {
 
         worldTMSTileSource.setName("worldTMS").setAlpha(true)
                 .setBaseUrl("/tms/1.0.0/world_satellite_raster@EPSG:900913@jpeg/").setExtension("jpeg")
-                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(256)
+                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(SystemConstant.MAX_TILE_SIZE)
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         worldTMSTileSource.setUserAgent("Mapsforge Samples");
 
@@ -180,7 +180,7 @@ public class CatEyeMainActivity extends DefaultTheme {
 
         worldXYZTileSource.setName("worldXYZ").setAlpha(true)
                 .setBaseUrl("/xyz/world/").setExtension("jpeg")
-                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(256)
+                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(SystemConstant.MAX_TILE_SIZE)
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         worldXYZTileSource.setUserAgent("Mapsforge Samples");
 
@@ -211,7 +211,7 @@ public class CatEyeMainActivity extends DefaultTheme {
 
         cityTMSTileSource.setName("cityTMS").setAlpha(true)
                 .setBaseUrl("/tms/1.0.0/china_city_polygon@EPSG:900913@png/").setExtension("png")
-                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(256)
+                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(SystemConstant.MAX_TILE_SIZE)
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         cityTMSTileSource.setUserAgent("Mapsforge Samples");
 
@@ -242,7 +242,7 @@ public class CatEyeMainActivity extends DefaultTheme {
 
         cityXYZTileSource.setName("cityXYZ").setAlpha(true)
                 .setBaseUrl("/xyz/city/").setExtension("json")
-                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(256)
+                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(SystemConstant.MAX_TILE_SIZE)
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         cityXYZTileSource.setUserAgent("Mapsforge Samples");
 
@@ -273,7 +273,7 @@ public class CatEyeMainActivity extends DefaultTheme {
 
         gujiaoXYZTileSource.setName("cityXYZ").setAlpha(true)
                 .setBaseUrl("/xyz/dem/").setExtension("tif")
-                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(256)
+                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(SystemConstant.MAX_TILE_SIZE)
                 .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
         gujiaoXYZTileSource.setUserAgent("Mapsforge Samples");
 

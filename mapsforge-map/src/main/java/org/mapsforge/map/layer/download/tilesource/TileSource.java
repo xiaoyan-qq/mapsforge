@@ -21,7 +21,7 @@ import org.mapsforge.core.model.Tile;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public interface TileSource {
+public interface TileSource{
     /**
      * Returns the default time-to-live (TTL) for cached tiles.
      */

@@ -20,6 +20,10 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
+import com.vondear.rxtools.RxTool;
+
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.renderer.MapWorkerPool;
 import org.mapsforge.map.model.DisplayModel;
@@ -65,5 +69,16 @@ public class SamplesApplication extends Application {
             MapFile.wayFilterDistance = Integer.parseInt(preferences.getString(SETTING_WAYFILTERING_DISTANCE, "20"));
         }
         MapWorkerPool.DEBUG_TIMING = preferences.getBoolean(SETTING_DEBUG_TIMING, false);
+
+//        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+//                .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
+//                .methodCount(0)         // (Optional) How many method line to show. Default 2
+//                .methodOffset(7)        // (Optional) Hides internal method calls up to offset. Default 5
+//                .logStrategy(customLog) // (Optional) Changes the log strategy to print out. Default LogCat
+//                .tag("My custom tag")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+//                .build();
+
+        Logger.addLogAdapter(new AndroidLogAdapter());//初始化Logger
+        RxTool.init(this);//初始化RxTools
     }
 }

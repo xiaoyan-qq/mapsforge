@@ -4,5 +4,5 @@
     <dimen name="attribution_margin">1dp</dimen>
     <dimen name="attribution_size">4pt</dimen>
     <dimen name="controls_margin">8dp</dimen>
-
+    <dimen name="dialog_subtitle_font">20sp</dimen>
 </resources>

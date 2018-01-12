@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/layer_tile_download_level_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地图等级:"
+                android:textSize="@dimen/dialog_subtitle_font" />
+
+            <com.vondear.rxtools.view.RxSeekBar
+                android:id="@+id/rx_range_seekbar_level"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                app:cellMode="number"
+                app:cells="15"
+                app:lineColorEdge="@color/colorSeekBarDefault"
+                app:lineColorSelected="@color/colorAccent"
+                app:markTextArray="@array/tile_download_level"
+                app:maxProgress="14"
+                app:minProgress="0"
+                app:seekBarHeight="1dp"
+                app:seekBarMode="range"
+                app:textPadding="17dp"
+                app:thumbPrimaryColor="@color/colorSeekBarDefault"
+                app:thumbSecondaryColor="@color/colorAccent"
+                app:thumbSize="20dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最小Level:" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+
+                <View
+                    android:layout_width="@dimen/activity_horizontal_margin"
+                    android:layout_height="0dp"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最大Level:" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_tile_level_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/dodgerblue"
+                android:text="确定" />
+        </LinearLayout>
+
+        <com.vondear.rxtools.view.RxProgressBar
+            android:id="@+id/rxpb_download_progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </LinearLayout>
+</RelativeLayout>

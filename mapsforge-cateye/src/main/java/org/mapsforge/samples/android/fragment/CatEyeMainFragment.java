@@ -94,7 +94,8 @@ public class CatEyeMainFragment extends BaseNoFragment {
 //                }
 //            }
             CatEyeOfflineRectDrawFragment catEyeOfflineRectDrawFragment = new CatEyeOfflineRectDrawFragment();
-            catEyeOfflineRectDrawFragment.setArguments(new Bundle());
+            Bundle bundle=new Bundle();
+            catEyeOfflineRectDrawFragment.setArguments(bundle);
             Rigger.getRigger(CatEyeMainFragment.this).startFragment(catEyeOfflineRectDrawFragment);
 //            try {
 //                Retrofit retrofit = new Retrofit.Builder()

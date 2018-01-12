@@ -16,6 +16,7 @@
  */
 package org.mapsforge.map.layer.download.tilesource;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -29,7 +30,7 @@ import java.util.Random;
  * 86,400,000 milliseconds. Subclasses should set {@code #defaultTTL} in their constructor to a value that is
  * appropriate for their tile source.
  */
-public abstract class AbstractTileSource implements TileSource {
+public abstract class AbstractTileSource implements TileSource,Serializable {
     private static final int TIMEOUT_CONNECT = 5000;
     private static final int TIMEOUT_READ = 10000;
 

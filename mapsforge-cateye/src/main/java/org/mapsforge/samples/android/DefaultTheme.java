@@ -14,6 +14,7 @@
  */
 package org.mapsforge.samples.android;
 
+import org.mapsforge.map.android.view.MapView;
 import org.mapsforge.map.rendertheme.InternalRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
 
@@ -32,4 +33,7 @@ public class DefaultTheme extends SamplesBaseActivity {
         return InternalRenderTheme.DEFAULT;
     }
 
+    public MapView getCurrentMapView() {
+        return mapView;
+    }
 }

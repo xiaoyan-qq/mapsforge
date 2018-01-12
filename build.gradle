@@ -24,6 +24,12 @@ allprojects {
     ext.jUnitVersion = "4.12"
     ext.supportVersion = "27.0.1"
 
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+
     if (JavaVersion.current().isJava8Compatible()) {
         tasks.withType(Javadoc) {
             options.addStringOption('Xdoclint:none', '-quiet')
