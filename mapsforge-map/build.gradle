@@ -8,6 +8,7 @@ dependencies {
     compile 'com.justkiddingbaby:fragment-rigger:1.0.0'//https://github.com/JustKiddingBaby/FragmentRigger/wiki/%E9%A6%96%E9%A1%B5
     compile 'com.github.vondear:RxTools:v1.7.6.4'//https://github.com/vondear/RxTools
     compile 'com.edmodo:rangebar:1.0.0'//双向的seekbar控件
+    compile 'org.xutils:xutils:3.5.0'//https://github.com/wyouflf/xUtils3
     compile 'com.orhanobut:logger:2.1.1'
     compile "com.android.support:support-compat:$supportVersion"
     compile "com.android.support:support-fragment:$supportVersion"

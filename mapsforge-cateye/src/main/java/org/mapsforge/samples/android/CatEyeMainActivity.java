@@ -17,7 +17,10 @@ package org.mapsforge.samples.android;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -29,7 +32,6 @@ import org.mapsforge.core.graphics.Color;
 import org.mapsforge.core.graphics.Style;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
-import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.datastore.MapDataStore;
 import org.mapsforge.map.datastore.MultiMapDataStore;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -40,9 +42,12 @@ import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.samples.android.fragment.CatEyeMainFragment;
+import org.mapsforge.samples.android.util.CatEyeTileUtils;
 import org.mapsforge.samples.android.util.SystemConstant;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Puppet(containerViewId = R.id.layer_main_root_fragment)
 public class CatEyeMainActivity extends DefaultTheme {
@@ -57,6 +62,8 @@ public class CatEyeMainActivity extends DefaultTheme {
     private TileDownloadLayer worldTMSLayer, worldXYZLayer, cityTMSLayer, cityXYZLayer, gujiaoXYZLayer;
     private CatEyeTileTMSSource worldTMSTileSource, cityTMSTileSource;
     private CatEyeTileXYZSource worldXYZTileSource, cityXYZTileSource, gujiaoXYZTileSource;
+
+    private List<TileDownloadLayer> tileDownloadLayerList;
 
     @Override
     public MapDataStore getMapFile() {
@@ -137,26 +144,33 @@ public class CatEyeMainActivity extends DefaultTheme {
         }));
 
 //        startFragment(CatEyeMainFragment.class);
-        CatEyeMainFragment catEyeMainFragment=new CatEyeMainFragment();
+        CatEyeMainFragment catEyeMainFragment = new CatEyeMainFragment();
         catEyeMainFragment.setArguments(new Bundle());
         Rigger.getRigger(CatEyeMainActivity.this).startFragment(catEyeMainFragment);
     }
 
+    private void initDownloadLayerCheckBox(final TileDownloadLayer downloadLayer,String chkName) {
+        ViewGroup chkListView = findViewById(R.id.cateye_main_layer_chk_list);
+        View chkInflateView = LayoutInflater.from(CatEyeMainActivity.this).inflate(R.layout.chk_tile_download_layer, null);
+        CheckBox chk = chkInflateView.findViewById(R.id.chk_tile_download_layer);
+        chk.setText(chkName);
+        chkListView.addView(chkInflateView);
+        chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    mapView.getLayerManager().getLayers().add(downloadLayer);
+                    downloadLayer.start();
+                    setMaxTextWidthFactor();
+                } else {
+                    mapView.getLayerManager().getLayers().remove(downloadLayer);
+                    setMaxTextWidthFactor();
+                }
+            }
+        });
+    }
+
     private void initTMSWorldLayerCheckBox() {
-        worldTMSTileSource = new CatEyeTileTMSSource(new String[]{
-                "54.223.166.139"/*, "b.tile.openstreetmap.fr", "c.tile.openstreetmap.fr"*/},
-                8080);
-
-        worldTMSTileSource.setName("worldTMS").setAlpha(true)
-                .setBaseUrl("/tms/1.0.0/world_satellite_raster@EPSG:900913@jpeg/").setExtension("jpeg")
-                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(SystemConstant.MAX_TILE_SIZE)
-                .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
-        worldTMSTileSource.setUserAgent("Mapsforge Samples");
-
-        CatEyeMainActivity.this.worldTMSLayer = new TileDownloadLayer(this.tileCaches.get(1),
-                CatEyeMainActivity.this.mapView.getModel().mapViewPosition, worldTMSTileSource,
-                AndroidGraphicFactory.INSTANCE);
-
         chk_tms_world = findViewById(R.id.chk_main_mapview_tms_world);
         chk_tms_world.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -167,37 +181,6 @@ public class CatEyeMainActivity extends DefaultTheme {
                     setMaxTextWidthFactor();
                 } else {
                     mapView.getLayerManager().getLayers().remove(CatEyeMainActivity.this.worldTMSLayer);
-                    setMaxTextWidthFactor();
-                }
-            }
-        });
-    }
-
-    private void initXYZWorldLayerCheckBox() {
-        worldXYZTileSource = new CatEyeTileXYZSource(new String[]{
-                "54.223.166.139"/*, "b.tile.openstreetmap.fr", "c.tile.openstreetmap.fr"*/},
-                8080);
-
-        worldXYZTileSource.setName("worldXYZ").setAlpha(true)
-                .setBaseUrl("/xyz/world/").setExtension("jpeg")
-                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(SystemConstant.MAX_TILE_SIZE)
-                .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
-        worldXYZTileSource.setUserAgent("Mapsforge Samples");
-
-        CatEyeMainActivity.this.worldXYZLayer = new TileDownloadLayer(this.tileCaches.get(2),
-                CatEyeMainActivity.this.mapView.getModel().mapViewPosition, worldXYZTileSource,
-                AndroidGraphicFactory.INSTANCE);
-
-        chk_xyz_world = findViewById(R.id.chk_main_mapview_xyz_world);
-        chk_xyz_world.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    mapView.getLayerManager().getLayers().add(CatEyeMainActivity.this.worldXYZLayer);
-                    worldXYZLayer.start();
-                    setMaxTextWidthFactor();
-                } else {
-                    mapView.getLayerManager().getLayers().remove(CatEyeMainActivity.this.worldXYZLayer);
                     setMaxTextWidthFactor();
                 }
             }
@@ -300,11 +283,57 @@ public class CatEyeMainActivity extends DefaultTheme {
     @Override
     protected void createLayers() {
         super.createLayers();
-        initTMSWorldLayerCheckBox();
+        tileDownloadLayerList = new ArrayList<>();
+
+        TileCache worldTMSCache = CatEyeTileUtils.createTileCache(CatEyeMainActivity.this, mapView, tileCaches, "worldTMS");
+        worldTMSLayer = CatEyeTileUtils.createTileDownloadLayer(worldTMSCache, CatEyeTileUtils.TILE_SOURCE_TYPE.TILE_SOURCE_TMS, "worldTMS", "54.223.166.139", true, "jpeg", mapView.getModel().mapViewPosition);
+        tileDownloadLayerList.add(worldTMSLayer);
+        initDownloadLayerCheckBox(worldTMSLayer,"worldTMSLayer");
+
+        TileCache worldXYZCache = CatEyeTileUtils.createTileCache(CatEyeMainActivity.this, mapView, tileCaches, "worldXYZ");
+        worldXYZLayer = CatEyeTileUtils.createTileDownloadLayer(worldXYZCache, CatEyeTileUtils.TILE_SOURCE_TYPE.TILE_SOURCE_TMS, "worldXYZ", "54.223.166.139", true, "jpeg", mapView.getModel().mapViewPosition);
+        tileDownloadLayerList.add(worldXYZLayer);
+        initDownloadLayerCheckBox(worldXYZLayer,"worldXYZLayer");
+
+        TileCache cityTMSCache = CatEyeTileUtils.createTileCache(CatEyeMainActivity.this, mapView, tileCaches, "cityTMS");
+        TileCache cityXYZCache = CatEyeTileUtils.createTileCache(CatEyeMainActivity.this, mapView, tileCaches, "cityXYZ");
+        TileCache gujiaoXYZCache = CatEyeTileUtils.createTileCache(CatEyeMainActivity.this, mapView, tileCaches, "gujiaoXYZ");
+
         initXYZWorldLayerCheckBox();
         initTMSCityLayerCheckBox();
         initXYZCityLayerCheckBox();
         initXYZGujiaoLayerCheckBox();
+    }
+
+    private void initXYZWorldLayerCheckBox() {
+        worldXYZTileSource = new CatEyeTileXYZSource(new String[]{
+                "54.223.166.139"/*, "b.tile.openstreetmap.fr", "c.tile.openstreetmap.fr"*/},
+                8080);
+
+        worldXYZTileSource.setName("worldXYZ").setAlpha(true)
+                .setBaseUrl("/xyz/world/").setExtension("jpeg")
+                .setParallelRequestsLimit(8).setProtocol("http").setTileSize(SystemConstant.MAX_TILE_SIZE)
+                .setZoomLevelMax((byte) 12).setZoomLevelMin((byte) 0);
+        worldXYZTileSource.setUserAgent("Mapsforge Samples");
+
+        CatEyeMainActivity.this.worldXYZLayer = new TileDownloadLayer(this.tileCaches.get(2),
+                CatEyeMainActivity.this.mapView.getModel().mapViewPosition, worldXYZTileSource,
+                AndroidGraphicFactory.INSTANCE);
+
+        chk_xyz_world = findViewById(R.id.chk_main_mapview_xyz_world);
+        chk_xyz_world.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    mapView.getLayerManager().getLayers().add(CatEyeMainActivity.this.worldXYZLayer);
+                    worldXYZLayer.start();
+                    setMaxTextWidthFactor();
+                } else {
+                    mapView.getLayerManager().getLayers().remove(CatEyeMainActivity.this.worldXYZLayer);
+                    setMaxTextWidthFactor();
+                }
+            }
+        });
     }
 
     @Override
@@ -342,41 +371,6 @@ public class CatEyeMainActivity extends DefaultTheme {
     @Override
     protected void createTileCaches() {
         super.createTileCaches();
-        this.tileCaches.add(createTileCacheTMSWorld());
-        this.tileCaches.add(createTileCacheXYZWorld());
-        this.tileCaches.add(createTileCacheTMSCity());
-        this.tileCaches.add(createTileCacheXYZCity());
-        this.tileCaches.add(createTileCacheXYZGuJiao());
-    }
-
-    protected TileCache createTileCacheTMSWorld() {
-        int tileSize = this.mapView.getModel().displayModel.getTileSize();
-        return AndroidUtil.createTileCache(this, getPersistableId() + "worldTMS", tileSize,
-                getScreenRatio(), this.mapView.getModel().frameBufferModel.getOverdrawFactor());
-    }
-
-    protected TileCache createTileCacheXYZWorld() {
-        int tileSize = this.mapView.getModel().displayModel.getTileSize();
-        return AndroidUtil.createTileCache(this, getPersistableId() + "worldXYZ", tileSize,
-                getScreenRatio(), this.mapView.getModel().frameBufferModel.getOverdrawFactor());
-    }
-
-    protected TileCache createTileCacheTMSCity() {
-        int tileSize = this.mapView.getModel().displayModel.getTileSize();
-        return AndroidUtil.createTileCache(this, getPersistableId() + "cityTMS", tileSize,
-                getScreenRatio(), this.mapView.getModel().frameBufferModel.getOverdrawFactor());
-    }
-
-    protected TileCache createTileCacheXYZCity() {
-        int tileSize = this.mapView.getModel().displayModel.getTileSize();
-        return AndroidUtil.createTileCache(this, getPersistableId() + "cityXYZ", tileSize,
-                getScreenRatio(), this.mapView.getModel().frameBufferModel.getOverdrawFactor());
-    }
-
-    protected TileCache createTileCacheXYZGuJiao() {
-        int tileSize = this.mapView.getModel().displayModel.getTileSize();
-        return AndroidUtil.createTileCache(this, getPersistableId() + "gujiaoXYZ", tileSize,
-                getScreenRatio(), this.mapView.getModel().frameBufferModel.getOverdrawFactor());
     }
 
     public CatEyeTileTMSSource getCityTMSTileSource() {

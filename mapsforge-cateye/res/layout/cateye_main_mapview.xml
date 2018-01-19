@@ -29,41 +29,12 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/cateye_main_layer_list"
+        android:id="@+id/cateye_main_layer_chk_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:background="@android:color/holo_orange_dark"
         android:orientation="vertical">
 
-        <CheckBox
-            android:id="@+id/chk_main_mapview_tms_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag=""
-            android:text="world_tms"></CheckBox>
-        <CheckBox
-            android:id="@+id/chk_main_mapview_xyz_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag=""
-            android:text="world_xyz"></CheckBox>
-        <CheckBox
-            android:id="@+id/chk_main_mapview_tms_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag=""
-            android:text="城市_tms"></CheckBox>
-        <CheckBox
-            android:id="@+id/chk_main_mapview_xyz_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag=""
-            android:text="城市_xyz"></CheckBox>
-        <CheckBox android:id="@+id/chk_main_mapview_xyz_gujiao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:tag=""
-            android:text="古交_xyz"></CheckBox>
     </LinearLayout>
 </RelativeLayout>

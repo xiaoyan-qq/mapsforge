@@ -187,4 +187,11 @@ public class TileDownloadLayer extends TileLayer<DownloadJob> implements Observe
         this.requestRedraw();
     }
 
+    public TileSource getTileSource() {
+        if (tileSource != null) {
+            return tileSource;
+        }
+        return null;
+    }
+
 }
